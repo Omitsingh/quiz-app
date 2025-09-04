@@ -16,12 +16,14 @@ export default function Home({ user, onLogin }) {
       return;
     }
 
-    if (passwordInput !== "1234") {// Simple password check
-      setError("Invalid password");
+    const isPasswordNumeric = /^\d+$/.test(passwordInput);
+
+    if (!isPasswordNumeric) {
+      setError("Password must contain only numbers");
       return;
     }
 
-    onLogin(usernameInput.trim());// save login
+    onLogin(usernameInput.trim()); // save login
     setUsernameInput("");
     setPasswordInput("");
     setError(null);
@@ -29,7 +31,7 @@ export default function Home({ user, onLogin }) {
   };
 
   const startQuiz = () => {
-    navigate("/quiz");// Navigate to quiz page
+    navigate("/quiz"); // Navigate to quiz page
   };
 
   return (
@@ -42,19 +44,19 @@ export default function Home({ user, onLogin }) {
       }}
     >
       <div className="bg-white/30 backdrop-blur-md shadow-xl rounded-xl p-8 max-w-md w-full text-center border border-white/40">
-
         {!user ? (
           !showLoginForm ? (
             <>
               <h2 className="text-3xl font-bold mb-6 text-indigo-700">
                 Welcome to QuizMaster!
               </h2>
-              <h2 className="text-xl font-bold mb-2">Play To Gain Your Knowledge</h2>
-        <p className="text-black-600 mb-8">
-          Challenge yourself with fun quizzes and test how much you really know. 
-          Click below to begin and see your score instantly!
-        </p>
-      
+              <h2 className="text-xl font-bold mb-2">
+                Play To Gain Your Knowledge
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Challenge yourself with fun quizzes and test how much you really
+                know. Click below to begin and see your score instantly!
+              </p>
 
               <p className="mb-6 text-slate-700">
                 Test your knowledge and challenge yourself.
@@ -88,7 +90,9 @@ export default function Home({ user, onLogin }) {
               />
 
               {error && (
-                <p className="text-red-600 mb-4 text-sm font-semibold">{error}</p>
+                <p className="text-red-600 mb-4 text-sm font-semibold">
+                  {error}
+                </p>
               )}
 
               <button
