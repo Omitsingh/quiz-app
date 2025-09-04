@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Simple login page
 export default function LoginPage({ onLogin }) {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = () => {
     if (username.trim()) {
-      localStorage.setItem("quizUser", username);
+      localStorage.setItem("quizUser", username); // save user
       onLogin(username);
       navigate("/"); // ⬅ Redirect to Home instead of /quiz
     }

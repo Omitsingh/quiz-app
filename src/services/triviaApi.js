@@ -1,16 +1,17 @@
 import questions from "../data/questions.json"
 
-// fallback: load local JSON
+// fallback: load local JSON/ Question
 export async function fetchQuestionsLocal() {
   return questions
 }
 
-// API: OpenTriviaDB
+// API: Fetch from OpenTriviaDB API
 export async function fetchQuestionsAPI(amount = 5) {
   try {
     const res = await fetch(`https://opentdb.com/api.php?amount=${amount}&type=multiple`)
     const data = await res.json()
 
+    // Map API data to app format & shuffle options
     return data.results.map((q, idx) => {
       const options = [...q.incorrect_answers, q.correct_answer].sort(() => Math.random() - 0.5)
       return {

@@ -8,19 +8,23 @@ import ResultsPage from "./pages/ResultsPage.jsx";
 import About from "./pages/About.jsx";
 import ThankYou from "./pages/ThankYou.jsx";
 
+// Main App component with routing & user state
 export default function App() {
   const [user, setUser] = useState(null);
 
+// Load saved user from localStorage on mount
   useEffect(() => {
     const savedUser = localStorage.getItem("quizUser");
     if (savedUser) setUser(savedUser);
   }, []);
 
+  // Login → save to localStorage
   const handleLogin = (username) => {
     localStorage.setItem("quizUser", username);
     setUser(username);
   };
 
+   // Logout → remove from localStorage
   const handleLogout = () => {
     localStorage.removeItem("quizUser");
     setUser(null);

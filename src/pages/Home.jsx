@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Landing page with login & start quiz
 export default function Home({ user, onLogin }) {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [usernameInput, setUsernameInput] = useState("");
@@ -8,18 +9,19 @@ export default function Home({ user, onLogin }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Handle login logic
   const handleLogin = () => {
     if (!usernameInput.trim() || !passwordInput) {
       setError("Please enter username and password");
       return;
     }
 
-    if (passwordInput !== "1234") {
+    if (passwordInput !== "1234") {// Simple password check
       setError("Invalid password");
       return;
     }
 
-    onLogin(usernameInput.trim());
+    onLogin(usernameInput.trim());// save login
     setUsernameInput("");
     setPasswordInput("");
     setError(null);
@@ -27,7 +29,7 @@ export default function Home({ user, onLogin }) {
   };
 
   const startQuiz = () => {
-    navigate("/quiz");
+    navigate("/quiz");// Navigate to quiz page
   };
 
   return (

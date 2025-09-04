@@ -5,15 +5,16 @@ import ProgressBar from "../components/ProgressBar";
 import OptionsList from "../components/OptionsList";
 import Controls from "../components/Controls";
 
+// Quiz page → show questions, options, timer
 export default function QuizPage() {
   const navigate = useNavigate();
   const quiz = useQuiz(5);
-
+// Auto navigation when time is 0
   useEffect(() => {
     // When timer runs out
     if (quiz.timeLeft === 0) {
       if (quiz.current + 1 === quiz.questions.length) {
-        // ✅ Last question → go to ThankYou page
+        //Last question → go to ThankYou page
         navigate("/thankyou", {
           state: {
             score: quiz.score,
@@ -38,7 +39,7 @@ export default function QuizPage() {
       return;
     }
 
-    // ✅ Last question always goes to ThankYou (not Results)
+    //  Last question always goes to ThankYou (not Results)
     navigate("/thankyou", {
       state: {
         score: quiz.score,
